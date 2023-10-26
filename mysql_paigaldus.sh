@@ -24,7 +24,7 @@ else
     echo "MySQL-serveri paigaldamisel tekkis viga. Palun kontrollige süsteemi logifaile."
 fi
 
-# Annab juurdepääsu MySQL serverile ilma paroolita (NB! See on turvarisk ja peaks olema vaid testimiseks)
+# Annab juurdepääsu MySQL serverile ilma paroolita
 echo "Luban juurdepääsu MySQL serverile ilma paroolita (ainult testimiseks!)"
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
 
