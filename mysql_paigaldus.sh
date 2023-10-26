@@ -25,7 +25,7 @@ else
 fi
 
 # Annab juurdepääsu MySQL serverile ilma paroolita
-echo "Luban juurdepääsu MySQL serverile ilma paroolita (ainult testimiseks!)"
+echo "Luban juurdepääsu MySQL serverile ilma paroolita"
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
 
 # Näitame MySQL serveri versiooni
