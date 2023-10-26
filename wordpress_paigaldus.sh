@@ -1,10 +1,4 @@
 #!/bin/bash
-
-# Skripti nimi: wordpress_paigaldus.sh
-# Kirjeldus: See skript kontrollib, kas vajalikud teenused on paigaldatud, ja paigaldab WordPressi ning teostab vajalikud seadistused.
-# Autor: Sinu Nimi
-# Kuupäev: 26. oktoober 2023
-
 # Kontrollime, kas skripti käivitaja on root kasutaja
 if [ "$EUID" -ne 0 ]; then
     echo "Palun käivita skript root kasutajana"
