@@ -1,33 +1,24 @@
-#!/bin/bash
+---
+- hosts: webservers
+  become: true
+  become_user: root
+  tasks:
+  - name: Loome allalaadimiseks kataloogi
+    file:
+      path=/root/allalaadmised
+      owner=root
+      group=root
+      mode=0755
+      state=directory
 
-# MySQL serveri paigaldusskript
+  - name: Allalaadmine mysql_5.7 repositooriumi pakett apt-i lisamiseks
+    get_url:
+      url: https://repo.mysql.com/mysql-apt-config_0.8.26-1_all.deb
+      dest: "/root/allalaadmised"
+      mode: 0440
 
-# Kontrollime, kas skripti käivitaja on root kasutaja
-if [ "$(id -u)" != "0" ]; then
-    echo "Skripti käivitamiseks peate olema root kasutaja."
-    exit 1
-fi
+  - name: installeerime mysql_5.7 repositoorium
+    apt: "deb=/root/allalaadmised/mysql-apt-config_0.8.26-1_all.deb"
 
-# Värskendame paketihaldurit
-apt update
 
-# Paigaldame MySQL-serveri teenuse
-apt install -y mysql-server
 
-# Käivitame MySQL serveri teenuse
-service mysql start
-
-# MySQL teenuse oleku kontroll
-if service mysql status | grep -q "active (running)"; then
-    echo "MySQL-server on edukalt paigaldatud ja käivitatud."
-else
-    echo "MySQL-serveri paigaldamisel tekkis viga. Palun kontrollige süsteemi logifaile."
-fi
-
-# Annab juurdepääsu MySQL serverile ilma paroolita
-echo "Luban juurdepääsu MySQL serverile ilma paroolita"
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''; FLUSH PRIVILEGES;"
-
-# Näitame MySQL serveri versiooni
-mysql_version=$(mysql --version)
-echo "MySQL serveri versioon: $mysql_version"
