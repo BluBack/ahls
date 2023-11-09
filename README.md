@@ -8,11 +8,11 @@ See skript paigaldab Apache veebiserveri ning seab selle käivituma automaatselt
 
 ### mysql_paigaldus.sh 
 
-See skript paigaldab MySQL andmebaasiserveri ning seab selle käivituma automaatselt süsteemi käivitamisel, kui see pole juba nii tehtud. Samuti seab skript MySQL juurkasutaja parooli.
+See skript paigaldab MySQL andmebaasiserveri ning seab selle käivituma automaatselt süsteemi käivitamisel, kui see pole juba nii tehtud.
 
 ### php_paigaldus.sh 
 
-See skript paigaldab PHP programmeerimiskeele seadistused, mida kasutatakse Apache veebiserveris. Samuti paigaldab see hulga valitud PHP mooduleid, mis on vajalikud mõne või mitme konkreetse rakenduse jaoks.
+See skript paigaldab PHP, mida kasutatakse Apache veebiserveris. Samuti paigaldab see hulga valitud PHP mooduleid, mis on vajalikud mõne või mitme konkreetse rakenduse jaoks.
 
 ### phpmyadmin_paigaldus.sh
 
