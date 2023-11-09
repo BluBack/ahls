@@ -1,18 +1,30 @@
-#!/bin/bash
+---
+- hosts: webservers
+  tasks:
+    - name: install apache2
+      apt: name=apache2 state=latest
 
-# Kontrolli, kas Apache teenus on paigaldatud
-if ! [ -x "$(command -v apache2)" ]; then
-  echo "Apache teenust ei leitud. Laen Apache teenuse alla..."
-  sudo apt update
-  sudo apt install apache2 -y
-  echo "Apache teenus on paigaldatud."
-else
-  echo "Apache teenus on juba paigaldatud."
-fi
+    - name: Loome public_html kataloog userile
+      file:
+       path=/home/kristo/public_html
+       owner=kristo
+       group=kristo
+       mode=0755
+       state=directory
 
-# Kontrolli Apache teenuse staatust ja näita seda
-if systemctl is-active --quiet apache2; then
-  echo "Apache teenus on käivitatud."
-else
-  echo "Apache teenus ei ole käivitatud."
-fi
+    - name: Lubame userdir mod
+      apache2_module: name=userdir state=present
+
+    - name: Apache2 serverile alglaadimine
+      service:
+        name: apache2
+        state: restarted
+
+    - name: Kopeerime index.html faili Userile kodus_public_html kataloogi
+      copy:
+        src: /var/www/html/index.html
+        dest: /home/kristo/public_html/
+        remote_src: yes
+        owner: kristo
+        group: kristo
+
